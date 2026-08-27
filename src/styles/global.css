@@ -1,0 +1,523 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+ * Pockit design tokens.
+ *
+ * Palette, radii and type scale are lifted from the site-design artboards
+ * (Main.dc.html / Mobile.dc.html / Privacy.dc.html). --accent and --glow are
+ * the exception: they are copied verbatim from the shipping app's own
+ * `DARK_TOKENS`/`LIGHT_TOKENS` in `src/theme/tokens.ts` (the expenses repo),
+ * not from the artboards, which drew a lighter, less-saturated violet than
+ * what the app actually ships in light mode.
+ *
+ * A handful of other values were changed from the artboards because the
+ * originals fail WCAG 2.1 AA (4.5:1 for body text). Measured ratios are noted
+ * inline; the script that produced them is documented in README.md.
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0d12;
+  --surface: #151821;
+  --elev: #1d212c;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --text: #f5f6f8;
+  /* Artboard used 0.55 (6.25:1). Raised to 0.62 to keep a visible gap from
+   * --text3 now that --text3 has been raised to pass AA. */
+  --text2: rgba(245, 246, 248, 0.62); /* 7.71:1 on --bg */
+  /* Artboard used 0.35 = 3.17:1, which fails AA and is used for real copy
+   * (the CTA subtitle, footer blurb, policy dateline). */
+  --text3: rgba(245, 246, 248, 0.48); /* 5.00:1 on --bg */
+
+  /* = expenses/src/theme/tokens.ts DARK_TOKENS.accent */
+  --accent: #8d82ff; /* 6.27:1 on --bg, for text/links/icons */
+  --pos: oklch(0.75 0.15 152); /* 9.27:1 */
+  --neg: oklch(0.68 0.18 25); /* 6.21:1 */
+
+  --bar: rgba(21, 24, 33, 0.85);
+  /* = expenses/src/theme/tokens.ts DARK_TOKENS.accentShadow */
+  --glow: rgba(107, 71, 247, 0.35);
+  --shadow-device: 0 40px 90px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --elev: #edeef2;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  --text: #14161c;
+  /* Artboard used 0.55 = 3.92:1, a fail. */
+  --text2: rgba(20, 22, 28, 0.72); /* 6.90:1 on --bg */
+  /* Artboard used 0.35 = 2.21:1, a clear fail. */
+  --text3: rgba(20, 22, 28, 0.62); /* 4.91:1 on --bg */
+
+  /* = expenses/src/theme/tokens.ts LIGHT_TOKENS.accent. The artboard drew
+   * oklch(0.58 0.19 288) = 4.23:1, a near-fail; the app itself already ships
+   * a much darker, more saturated violet than that (deliberately: it sits on
+   * the sRGB gamut boundary, chosen for light-background contrast), so using
+   * the real value both fixes the artboard's shortfall and matches the app. */
+  --accent: #4c00c9; /* 8.96:1 on --bg */
+  /* Artboard used 0.62 / 0.60 = 3.13:1 and 3.98:1, both fails. The ledger
+   * colours carry meaning, so they are darkened rather than dropped. This
+   * mismatches the app's own (also-failing) light positive/negative; see
+   * README for why accent was synced but these two were not. */
+  --pos: oklch(0.5 0.15 152); /* 5.04:1 */
+  --neg: oklch(0.52 0.19 25); /* 5.59:1 */
+
+  --bar: rgba(255, 255, 255, 0.85);
+  /* = expenses/src/theme/tokens.ts LIGHT_TOKENS.accentShadow */
+  --glow: rgba(107, 71, 247, 0.25);
+  --shadow-device: 0 40px 90px rgba(0, 0, 0, 0.18);
+}
+
+/* Filled buttons use --accent directly, same as the app (tokens.accent
+ * doubles as the FAB/Save-key background there too, with white onAccent
+ * text). In light mode this is 9.76:1 white-on-fill, comfortably past AA.
+ * In dark mode it is 3.10:1: below the 4.5:1 body-text threshold, but this
+ * is the app's own existing choice, faithfully carried over rather than a
+ * website-only shortfall — see README for the trade-off if you want it
+ * changed. */
+:root {
+  --accent-fill: var(--accent);
+  --accent-fill-hover: color-mix(in oklab, var(--accent) 88%, white);
+  --on-accent: #ffffff; /* matches tokens.ts onAccent in both themes */
+}
+
+:root[data-theme='light'] {
+  --accent-fill: var(--accent);
+  --accent-fill-hover: color-mix(in oklab, var(--accent) 88%, white);
+}
+
+/* Category swatch hues, straight from the app's category palette. Decorative:
+ * every swatch is paired with a text label, never used alone to carry meaning. */
+:root {
+  --cat-food: oklch(0.7 0.14 18);
+  --cat-transport: oklch(0.7 0.14 218);
+  --cat-groceries: oklch(0.7 0.14 95);
+  --cat-bills: oklch(0.7 0.14 55);
+  --cat-health: oklch(0.7 0.14 150);
+  --cat-shopping: oklch(0.7 0.14 320);
+  --cat-travel: oklch(0.7 0.14 255);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elev: var(--elev);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text2: var(--text2);
+  --color-text3: var(--text3);
+  --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-on-accent: var(--on-accent);
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+  --color-bar: var(--bar);
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI',
+    'Helvetica Neue', system-ui, sans-serif;
+
+  --radius-card: 24px;
+  --radius-tile: 22px;
+  --radius-inner: 18px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets on the policy page must clear the sticky header. */
+  scroll-padding-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* No horizontal scroll on any viewport, whatever the mockups do. */
+  overflow-x: hidden;
+}
+
+/* A single visible focus style everywhere. 2px solid at 2px offset clears the
+ * WCAG 2.2 focus-appearance area guidance, and --accent is 6.27:1 / 5.02:1
+ * against the page, well past the 3:1 the indicator itself needs. */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text);
+}
+
+/* Prose links inside the policy body keep an underline: colour alone should
+ * not be the only thing marking a link in a wall of text. */
+.prose-policy a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 30%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Type scale
+ *
+ * Each step interpolates between the mobile artboard (390px) and the desktop
+ * artboard (1440px) values, so both endpoints land exactly on the design.
+ * ------------------------------------------------------------------------- */
+
+.t-eyebrow {
+  font-size: clamp(0.719rem, 0.684rem + 0.14vw, 0.813rem); /* 11.5 -> 13 */
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.t-h1 {
+  font-size: clamp(2.625rem, 1.696rem + 3.81vw, 5.125rem); /* 42 -> 82 */
+  line-height: 1.05;
+  letter-spacing: -0.032em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.t-h2 {
+  font-size: clamp(2rem, 1.489rem + 2.1vw, 3.375rem); /* 32 -> 54 */
+  line-height: 1.09;
+  letter-spacing: -0.026em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.t-h2-lg {
+  font-size: clamp(2.125rem, 1.475rem + 2.67vw, 3.875rem); /* 34 -> 62 */
+  line-height: 1.06;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.t-h2-sm {
+  font-size: clamp(1.75rem, 1.415rem + 1.37vw, 2.625rem); /* 28 -> 42 */
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.t-lead {
+  font-size: clamp(1.0625rem, 1.005rem + 0.24vw, 1.3125rem); /* 17 -> 21 */
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--text2);
+  text-wrap: pretty;
+}
+
+.t-body {
+  font-size: clamp(1.031rem, 0.995rem + 0.15vw, 1.1875rem); /* 16.5 -> 19 */
+  line-height: 1.6;
+  color: var(--text2);
+  text-wrap: pretty;
+}
+
+.t-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+ * Layout primitives
+ * ------------------------------------------------------------------------- */
+
+.section {
+  padding-block: clamp(5.25rem, 3.5rem + 4.19vw, 9.375rem); /* 84 -> 150 */
+  padding-inline: clamp(1.5rem, 1.13rem + 0.95vw, 2.5rem); /* 24 -> 40 */
+}
+
+.section--banded {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+}
+
+.shell {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.shell--wide {
+  max-width: 1200px;
+}
+
+.shell--narrow {
+  max-width: 940px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+/* On banded sections the cards invert: the band is --surface, so the card
+ * needs the page colour to stay distinguishable. */
+.section--banded .card,
+.card--inset {
+  background: var(--bg);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  /* 52px tall, comfortably past the 44px minimum touch target. */
+  min-height: 52px;
+  padding-inline: 2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 12px 40px var(--glow);
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
+}
+
+.btn:hover {
+  background: var(--accent-fill-hover);
+  color: var(--on-accent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--sm {
+  min-height: 44px;
+  padding-inline: 1.25rem;
+  font-size: 0.875rem;
+  box-shadow: none;
+}
+
+.btn[data-unreleased] {
+  background: transparent;
+  border: 1px dashed var(--text3);
+  color: var(--text3);
+  box-shadow: none;
+  cursor: default;
+}
+
+.btn[data-unreleased]:hover {
+  background: transparent;
+  color: var(--text3);
+}
+
+/* Small caps label used above card groups and in the footer. */
+.label-caps {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+/* ---------------------------------------------------------------------------
+ * Device mockups
+ *
+ * The phone frames are fixed-width illustrations of the app. They scale down
+ * with a transform below the desktop breakpoint rather than reflowing, so the
+ * app's own layout is never misrepresented.
+ * ------------------------------------------------------------------------- */
+
+.device {
+  position: relative;
+  flex-shrink: 0;
+  padding: 11px;
+  border-radius: 56px;
+  background: var(--elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-device);
+}
+
+.device__screen {
+  width: 338px;
+  border-radius: 45px;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.device-scale {
+  /* 360px frame + shadow room. Shrinks to fit a 390px phone viewport. */
+  --device-scale: 0.78;
+  transform: scale(var(--device-scale));
+  transform-origin: top center;
+  margin-bottom: calc((var(--device-scale) - 1) * var(--device-h, 726px));
+}
+
+@media (min-width: 480px) {
+  .device-scale {
+    --device-scale: 0.92;
+  }
+}
+
+@media (min-width: 1024px) {
+  .device-scale {
+    --device-scale: 1;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------------
+ * Policy document
+ * ------------------------------------------------------------------------- */
+
+.t-h1-doc {
+  font-size: clamp(2.25rem, 1.879rem + 1.52vw, 3.25rem); /* 36 -> 52 */
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+/* Long-form legal copy. 17px at 1.75 is deliberately looser than the marketing
+ * body text: this is read start to finish, not skimmed. */
+.prose-policy {
+  font-size: clamp(1rem, 0.977rem + 0.1vw, 1.0625rem); /* 16 -> 17 */
+  line-height: 1.75;
+  color: var(--text2);
+}
+
+.prose-policy > h2 {
+  margin: 3rem 0 0;
+  font-size: clamp(1.375rem, 1.14rem + 0.95vw, 1.6875rem); /* 22 -> 27 */
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  font-weight: 700;
+  color: var(--text);
+  scroll-margin-top: 5.5rem;
+}
+
+.prose-policy > h2:first-child {
+  margin-top: 0;
+}
+
+.prose-policy h3 {
+  margin: 2rem 0 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.prose-policy p {
+  margin: 1rem 0 0;
+}
+
+.prose-policy strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.prose-policy ul {
+  margin: 1rem 0 0;
+  padding-left: 1.125rem;
+  list-style: disc;
+}
+
+.prose-policy li {
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.prose-policy li::marker {
+  color: var(--text3);
+}
+
+/* Wide tables scroll in their own box rather than pushing the page sideways. */
+.table-scroll {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inner);
+}
+
+.table-scroll table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.table-scroll th,
+.table-scroll td {
+  padding: 0.875rem 1.125rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-scroll tr:last-child td {
+  border-bottom: 0;
+}
+
+.table-scroll th {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.toc-link {
+  display: block;
+  padding: 0.375rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text2);
+}

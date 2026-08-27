@@ -1,0 +1,36 @@
+---
+import Icon from '../Icon.astro';
+import type { IconName } from '../../icons';
+
+const features: { icon: IconName; title: string; body: string }[] = [
+  { icon: 'search', title: 'Search', body: 'Notes, categories, accounts and tags.' },
+  { icon: 'list', title: 'Filters per tab', body: 'Narrowing your history leaves the chart alone. Each tab keeps its own lens.' },
+  { icon: 'transfer', title: 'Transfers', body: 'Move money between your own accounts. Counted as neither income nor expense.' },
+  { icon: 'tag', title: 'Tags', body: 'Free text with autocomplete from what you have typed before. Rename or merge later.' },
+  { icon: 'calendar-check', title: 'Effective dates', body: "A salary that lands on the 30th can count toward next month without lying about when it arrived." },
+  { icon: 'download', title: 'Backup and restore', body: 'A ZIP of plain CSVs you can open in a spreadsheet. Your data, in a format that outlives the app.' },
+  { icon: 'sun', title: 'Light and dark', body: 'A stored preference, not a guess at your system setting. Pick one and it stays picked.' },
+  { icon: 'trash', title: 'Swipe to delete', body: 'Tap a row to edit it, swipe it left to remove it. No menus in between.' },
+];
+---
+
+<section class="section">
+  <div class="shell flex flex-col items-center">
+    <h2 class="t-h2-sm max-w-[760px] text-center">And the rest of it.</h2>
+    <ul
+      class="mt-14 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        features.map((feature) => (
+          <li class="card rounded-[var(--radius-tile)] p-6.5">
+            <span class="block text-accent"><Icon name={feature.icon} size={24} /></span>
+            <h3 class="mt-4 text-[17px] font-bold tracking-[-0.01em]">
+              {feature.title}
+            </h3>
+            <p class="mt-2 text-[14.5px] leading-[1.55] text-text2">{feature.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

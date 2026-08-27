@@ -1,0 +1,33 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import Screenshot from '../Screenshot.astro';
+import Icon from '../Icon.astro';
+---
+
+<section class="section section--banded mt-24 lg:mt-30" id="features">
+  <div
+    class="shell flex flex-col items-center gap-14 lg:flex-row lg:justify-center lg:gap-22"
+  >
+    <div class="lg:w-[480px]">
+      <p class="t-eyebrow">Entry</p>
+      <h2 class="t-h2 mt-3.5">Add. Done.</h2>
+      <p class="t-body mt-5">
+        Capture every expense with ease. Quickly record purchases, categories,
+        and accounts as you go. Simple tracking that fits naturally into your day.
+      </p>
+      <p
+        class="card card--inset mt-7 flex items-center gap-2.5 rounded-[16px] px-4.5 py-3.5 text-[15px] text-text2"
+      >
+        <span class="shrink-0 text-accent"><Icon name="undo" size={18} strokeWidth={2} /></span>
+        Every save is confirmed with a five-second Undo.
+      </p>
+    </div>
+
+    <PhoneFrame
+      height={735}
+      label="The add-transaction sheet: an expense of 129 dollars on the keypad, Groceries selected as the category, the Cash account showing 522.50 left, and a Save key."
+    >
+      <Screenshot dark="/screenshots/entry-dark.png" light="/screenshots/entry-light.png" />
+    </PhoneFrame>
+  </div>
+</section>
