@@ -1,0 +1,88 @@
+---
+const accounts = [
+  { code: 'USD', name: 'Checking', meta: 'Bank · rate 1.00', balance: '$2,410.00' },
+  { code: 'EUR', name: 'Savings', meta: 'Savings · rate 1.08', balance: '€1,850.00' },
+  { code: 'JPY', name: 'Cash', meta: 'Cash · rate 0.0064', balance: '¥312,000' },
+] as const;
+
+const budgets = [
+  { name: 'Eating out', spent: '$164 of $250', pct: 66, meta: 'Weekly from Wednesday · 3 days left', over: false },
+  { name: 'Household', spent: '$612 of $900', pct: 68, meta: 'Monthly, rolls on the 25th', over: false },
+  { name: 'Bangkok trip', spent: '112% of $600', pct: 100, meta: 'One-off · Sep 12 – Sep 19', over: true },
+] as const;
+---
+
+<section class="section section--banded">
+  <div class="shell grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
+    <div>
+      <p class="t-eyebrow">Currencies</p>
+      <h2 class="t-h2-sm mt-3.5">Everything in one place.</h2>
+      <p class="t-body mt-5">
+        Keep all your accounts together and get a complete view of your money.
+        Track balances, income, and expenses across every account.
+      </p>
+      <ul class="mt-8 flex flex-col gap-3">
+        {
+          accounts.map((acct) => (
+            <li
+              class="card card--inset flex items-center gap-3.5 rounded-[18px] px-4.5 py-4"
+            >
+              <span
+                class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-elev text-[13px] font-bold text-text2"
+              >
+                {acct.code}
+              </span>
+              <span class="grow">
+                <span class="block text-[15px] font-semibold">{acct.name}</span>
+                <span class="mt-0.5 block text-[12.5px] text-text2">{acct.meta}</span>
+              </span>
+              <span class="tabular text-[15px] font-bold">{acct.balance}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <p class="t-eyebrow">Budgets</p>
+      <h2 class="t-h2-sm mt-3.5">Butgets made simple.</h2>
+      <p class="t-body mt-5">
+        Plan how much you want to spend and let Pockit keep track for you. See
+        your progress, stay within your limits, and spend with more confidence.
+      </p>
+      <ul class="mt-8 flex flex-col gap-3">
+        {
+          budgets.map((budget) => (
+            <li class="card card--inset rounded-[18px] p-5">
+              <div class="flex items-baseline justify-between gap-3">
+                <span class="text-[15px] font-semibold">{budget.name}</span>
+                <span
+                  class:list={[
+                    'tabular shrink-0 text-[13px]',
+                    budget.over ? 'font-semibold text-neg' : 'text-text2',
+                  ]}
+                >
+                  {budget.spent}
+                </span>
+              </div>
+              {/* Decorative: the figure above states the same thing in text. */}
+              <div
+                class="mt-3.5 h-2 overflow-hidden rounded-full bg-elev"
+                aria-hidden="true"
+              >
+                <div
+                  class:list={[
+                    'h-2 rounded-full',
+                    budget.over ? 'bg-neg' : 'bg-accent',
+                  ]}
+                  style={`width: ${budget.pct}%`}
+                />
+              </div>
+              <div class="mt-2.5 text-[12.5px] text-text2">{budget.meta}</div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

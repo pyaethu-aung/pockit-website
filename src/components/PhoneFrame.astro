@@ -1,0 +1,44 @@
+---
+/**
+ * Device bezel around an app screenshot mockup.
+ *
+ * The whole frame is exposed as a single `role="img"` with a written
+ * description. Without that, a screen reader would read out every fake
+ * transaction, amount and keypad digit inside it as if it were page content.
+ */
+interface Props {
+  /** Describes the screen for anyone who cannot see it. Required. */
+  label: string;
+  /** Screen height in px, from the artboard. Drives the scale-down offset. */
+  height: number;
+  /** Violet bloom behind the frame. Only used behind the hero device. */
+  glow?: boolean;
+  class?: string;
+}
+
+const { label, height, glow = false, class: className } = Astro.props;
+const frameHeight = height + 22; // 11px bezel on each side
+---
+
+<div class:list={['relative', className]}>
+  {
+    glow && (
+      <div
+        class="pointer-events-none absolute left-1/2 top-14 h-[380px] w-[380px] -translate-x-1/2 rounded-full bg-[var(--glow)] blur-[90px] lg:h-[620px] lg:w-[620px] lg:blur-[120px]"
+        aria-hidden="true"
+      />
+    )
+  }
+  <div class="device-scale" style={`--device-h: ${frameHeight}px`}>
+    <div
+      class="device"
+      style={`height: ${frameHeight}px`}
+      role="img"
+      aria-label={label}
+    >
+      <div class="device__screen" style={`height: ${height}px`}>
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

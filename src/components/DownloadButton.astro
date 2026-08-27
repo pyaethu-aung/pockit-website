@@ -1,0 +1,31 @@
+---
+import { SITE } from '../consts';
+
+/**
+ * The App Store URL does not exist yet. Rather than render a link to nowhere,
+ * the button becomes a labelled non-interactive element until SITE.appStoreUrl
+ * is filled in, at which point every instance turns into a real link.
+ */
+interface Props {
+  size?: 'sm' | 'lg';
+  full?: boolean;
+  label?: string;
+}
+
+const { size = 'lg', full = false, label } = Astro.props;
+
+const text = label ?? (size === 'sm' ? 'Download' : 'Download for iPhone');
+const classes = ['btn', size === 'sm' && 'btn--sm', full && 'w-full'];
+---
+
+{
+  SITE.appStoreUrl ? (
+    <a href={SITE.appStoreUrl} class:list={classes}>
+      {text}
+    </a>
+  ) : (
+    <span class:list={classes} data-unreleased>
+      {text} <span class="font-normal opacity-80">&middot; soon</span>
+    </span>
+  )
+}

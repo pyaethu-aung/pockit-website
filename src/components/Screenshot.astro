@@ -1,0 +1,50 @@
+---
+/**
+ * A real device screenshot, theme-swapped the same way ThemeToggle swaps its
+ * icon: both images ship in the page and CSS shows the one matching
+ * `document.documentElement.dataset.theme`, so there is no client JS and no
+ * flash on toggle.
+ */
+interface Props {
+  dark: string;
+  light: string;
+  class?: string;
+}
+
+const { dark, light, class: className } = Astro.props;
+---
+
+<div class:list={['screenshot', className]}>
+  <img src={dark} alt="" class="screenshot__img" data-theme-img="dark" />
+  <img src={light} alt="" class="screenshot__img" data-theme-img="light" />
+</div>
+
+<style>
+  .screenshot {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .screenshot__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .screenshot__img[data-theme-img='light'] {
+    position: absolute;
+    inset: 0;
+    display: none;
+  }
+
+  :global(:root[data-theme='light']) .screenshot__img[data-theme-img='dark'] {
+    display: none;
+  }
+
+  :global(:root[data-theme='light']) .screenshot__img[data-theme-img='light'] {
+    position: static;
+    display: block;
+  }
+</style>

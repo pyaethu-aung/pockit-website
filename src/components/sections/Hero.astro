@@ -1,0 +1,31 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import Screenshot from '../Screenshot.astro';
+import DownloadButton from '../DownloadButton.astro';
+import { SITE } from '../../consts';
+---
+
+<section
+  class="flex flex-col items-center px-6 pt-14 text-center md:px-10 lg:pt-26"
+>
+  <h1 class="t-h1 mt-4 max-w-[940px]">{SITE.tagline}</h1>
+  <p class="t-lead mt-5 max-w-[660px]">
+    Make sense of your money without the complexity. Track expenses, manage accounts, set budgets, and see your spending clearly all in one place.
+  </p>
+
+  <div class="mt-9 flex w-full max-w-[340px] flex-col items-center gap-3">
+    <DownloadButton full />
+    <span class="text-[13px] text-text3">
+      Free. No account required.
+    </span>
+  </div>
+
+  <PhoneFrame
+    class="mt-12 lg:mt-18"
+    height={735}
+    glow
+    label="The Expenses tab: a balance of 3,593.18 dollars, split into 4,440.00 income and 846.82 spent across 23 transactions, with the day’s entries listed underneath and a tab bar along the bottom."
+  >
+    <Screenshot dark="/screenshots/hero-dark.png" light="/screenshots/hero-light.png" />
+  </PhoneFrame>
+</section>

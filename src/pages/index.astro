@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Entry from '../components/sections/Entry.astro';
+import Categories from '../components/sections/Categories.astro';
+import CurrenciesBudgets from '../components/sections/CurrenciesBudgets.astro';
+import Stats from '../components/sections/Stats.astro';
+import PrivacyPromise from '../components/sections/PrivacyPromise.astro';
+import Features from '../components/sections/Features.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { SITE } from '../consts';
+---
+
+<Layout title={`${SITE.name} · ${SITE.tagline}`} current="home">
+  <Hero />
+  <Entry />
+  <Categories />
+  <CurrenciesBudgets />
+  <Stats />
+  <PrivacyPromise />
+  <Features />
+  <FinalCta />
+</Layout>

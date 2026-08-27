@@ -1,0 +1,62 @@
+---
+import Icon from '../Icon.astro';
+import type { IconName } from '../../icons';
+
+const pillars: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: 'no-account',
+    title: 'No account',
+    body: 'No email, no password, no profile. Open the app and start.',
+  },
+  {
+    icon: 'no-upload',
+    title: 'Nothing uploaded',
+    body: 'Your amounts, notes and categories are never sent anywhere. Export a ZIP of CSVs whenever you want them elsewhere.',
+  },
+  {
+    icon: 'lock',
+    title: 'Lock it down',
+    body: 'Optional Face ID or Touch ID with a PIN fallback, on launch and on your backup and reset screens.',
+  },
+];
+---
+
+<section class="section section--banded" id="privacy">
+  <div class="shell flex flex-col items-center text-center">
+    <p class="t-eyebrow">Privacy</p>
+    <h2 class="t-h2-lg mt-3.5 max-w-[880px]">Private by design.</h2>
+    <p class="t-lead mt-5 max-w-[660px]">
+      Your financial data stays on your phone. Your transactions are stored
+      locally in a SQLite database, with no account required, no background
+      syncing, and no copy of your spending sent to external servers.
+    </p>
+
+    <ul
+      class="mt-14 grid w-full max-w-[1000px] grid-cols-1 gap-5 text-left md:grid-cols-3"
+    >
+      {
+        pillars.map((pillar) => (
+          <li class="card p-7">
+            <span class="block text-accent"><Icon name={pillar.icon} size={26} /></span>
+            <h3 class="mt-4.5 text-[19px] font-bold tracking-[-0.01em]">
+              {pillar.title}
+            </h3>
+            <p class="mt-2.5 text-[15px] leading-[1.6] text-text2">{pillar.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-11 max-w-[700px] text-[15px] leading-[1.65] text-text3">
+      The only data that ever leaves the device is anonymous usage counts and,
+      if the app crashes, a technical report of what went wrong. Neither
+      carries an amount, a date, a name, or anything you typed, and both can be
+      switched off in Settings.
+    </p>
+    <p class="mt-5">
+      <a href="/privacy" class="text-[16px] font-semibold">
+        Read the privacy policy <span aria-hidden="true">&rarr;</span>
+      </a>
+    </p>
+  </div>
+</section>

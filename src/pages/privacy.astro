@@ -1,0 +1,290 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, POLICY_LAST_UPDATED } from '../consts';
+
+/**
+ * Text is taken from docs/privacy-policy.md in the app repo, with "Expense
+ * Tracker" replaced by the product name and the placeholder date filled in.
+ * When that file changes, change this page in the same commit and bump
+ * POLICY_LAST_UPDATED.
+ *
+ * The ids below are also the anchors on the <h2>s further down. Keep them
+ * matched: a renamed heading id silently breaks a contents link.
+ */
+const toc = [
+  { id: 'controller', label: 'Who is responsible' },
+  { id: 'device', label: 'Data on your device' },
+  { id: 'sent', label: 'What the app sends' },
+  { id: 'basis', label: 'Legal basis (EU/UK)' },
+  { id: 'transfers', label: 'International transfers' },
+  { id: 'retention', label: 'How long data is kept' },
+  { id: 'rights', label: 'Your rights' },
+  { id: 'children', label: 'Children' },
+  { id: 'changes', label: 'Changes to this policy' },
+  { id: 'contact', label: 'Contact' },
+] as const;
+
+const mailto = `mailto:${SITE.email}`;
+---
+
+<Layout
+  title={`Privacy Policy · ${SITE.name}`}
+  description={`How ${SITE.name} handles your data: your transactions never leave your phone, and the two things that do leave can be switched off.`}
+  current="privacy"
+>
+  <div class="section">
+    <div class="shell shell--narrow">
+      <h1 class="t-h1-doc">Privacy Policy</h1>
+      <p class="mt-4 text-[15px] text-text3">
+        Last updated: {POLICY_LAST_UPDATED} &middot; Applies to {SITE.name} for
+        iOS and Android
+      </p>
+
+      <div class="card mt-10 px-7 py-8 sm:px-9">
+        <h2 class="text-[13px] font-bold uppercase tracking-[0.1em] text-accent">
+          The short version
+        </h2>
+        <p class="mt-4 text-[clamp(1.0625rem,1rem+0.24vw,1.1563rem)] leading-[1.65] text-text">
+          Your transactions never leave your phone. There is no account, no
+          sign-in, and no server holding your data.
+        </p>
+        <p class="mt-3.5 text-[clamp(1rem,0.977rem+0.1vw,1.0313rem)] leading-[1.7] text-text2">
+          The only information that leaves your device is anonymous usage counts
+          and, if the app crashes, a technical report describing what went
+          wrong. Both can be switched off in Settings, and both are on by
+          default so a bug can be found and fixed before you have to report it
+          yourself.
+        </p>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-10 lg:flex-row lg:gap-15">
+        <!-- Contents. A disclosure on small screens so it does not push the
+             policy itself below the fold; a sticky rail on desktop. -->
+        <nav class="lg:hidden" aria-label="Contents">
+          <details class="card rounded-[var(--radius-inner)] px-5 py-4">
+            <summary class="cursor-pointer text-[15px] font-semibold text-text">
+              Contents
+            </summary>
+            <ul class="mt-2">
+              {
+                toc.map((item) => (
+                  <li>
+                    <a href={`#${item.id}`} class="toc-link">{item.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </nav>
+
+        <nav
+          class="hidden shrink-0 lg:sticky lg:top-24 lg:block lg:h-fit lg:w-[200px]"
+          aria-label="Contents"
+        >
+          <p class="label-caps mb-3">Contents</p>
+          <ul>
+            {
+              toc.map((item) => (
+                <li>
+                  <a href={`#${item.id}`} class="toc-link">{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <div class="prose-policy min-w-0 lg:max-w-[680px]">
+          <h2 id="controller">Who is responsible for your data</h2>
+          <p>
+            {SITE.person}, based in Vietnam, is the data controller for {SITE.name}.
+            You can reach me at <a href={mailto}>{SITE.email}</a>.
+          </p>
+
+          <h2 id="device">Your transactions stay on your device</h2>
+          <p>
+            <strong>
+              {SITE.name} never uploads your transactions, categories, accounts,
+              or budgets. There is no server, no cloud sync, and no account
+              holding them.
+            </strong>
+          </p>
+          <p>
+            Everything you record is saved inside the app’s own storage on your
+            device, in a local database. It is included in your device’s normal
+            iCloud or Android backup, the same as any other app’s files, but
+            {' '}{SITE.name} itself never transmits your financial data anywhere.
+          </p>
+          <p>
+            A backup you create with Backup &amp; Restore is a file you choose
+            where to send: saved to your device, shared through the system share
+            sheet, or kept wherever you put it. It goes where you send it, not
+            to us.
+          </p>
+
+          <h2 id="sent">What {SITE.name} does send</h2>
+          <p>
+            Two services receive information from the app. Neither receives your
+            transactions, your amounts, your dates, your notes, your account or
+            category names, or anything that identifies you.
+          </p>
+
+          <h3>1. Anonymous usage statistics, can be switched off</h3>
+          <p><strong>Service:</strong> TelemetryDeck (Germany, servers in the EU)</p>
+          <p>
+            To understand which parts of the app are actually used and worth
+            improving, {SITE.name} records events like: a transaction was saved
+            (and whether it was an expense, income, or transfer, never the
+            amount or note), a date range was changed, a filter was applied, an
+            entity such as a category or account was created. Alongside each
+            event: the app’s version, your device’s general model (such as
+            “iPhone 15 Pro”), its operating system version, and your device’s
+            language.
+          </p>
+          <p>
+            What it never records: amounts, dates, ids, names, tags, notes, the
+            search query, currency codes, or anything that identifies your
+            specific device (such as the name you gave it).
+          </p>
+          <p>
+            TelemetryDeck identifies a device using a random id generated on
+            this device, which is hashed again by TelemetryDeck with a
+            daily-rotating salt, so the same device cannot be recognized across
+            days, by us or by them.
+          </p>
+          <p>
+            <strong>To switch it off:</strong> Settings &rsaquo; Privacy &rsaquo;
+            Share Usage Data. Data stops immediately.
+          </p>
+
+          <h3>2. Crash reports, can be switched off</h3>
+          <p><strong>Service:</strong> Sentry (Germany, EU data region)</p>
+          <p>
+            When the app crashes or hits an unexpected error, a report is sent
+            so the bug can be found and fixed. It contains the technical state
+            of the app at the moment it failed: the code location, your device
+            model, OS version, and a short trail of recent app activity such as
+            “the database could not be opened.”
+          </p>
+          <p>
+            It does not contain your transactions, amounts, notes, or anything
+            you typed.
+          </p>
+          <p>
+            <strong>To switch it off:</strong> Settings &rsaquo; Privacy &rsaquo;
+            Share Crash Reports. Collection stops immediately, and any report
+            already queued on the device is deleted rather than sent.
+          </p>
+
+          <h2 id="basis">Legal basis for processing (EU/UK users)</h2>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">What</th>
+                  <th scope="col">Why</th>
+                  <th scope="col">Legal basis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Transactions, categories, accounts, budgets</td>
+                  <td>To provide the app’s core function</td>
+                  <td>
+                    Processed only on your device, not shared with us at all
+                  </td>
+                </tr>
+                <tr>
+                  <td>Anonymous usage statistics</td>
+                  <td>
+                    To understand which features are worth keeping and improving
+                  </td>
+                  <td>
+                    Anonymized, so outside the scope of data-protection law; a
+                    switch is offered regardless
+                  </td>
+                </tr>
+                <tr>
+                  <td>Crash reports</td>
+                  <td>To find and fix defects and keep the app stable</td>
+                  <td>
+                    Legitimate interest in a working, reliable app, with an
+                    opt-out
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="transfers">International transfers</h2>
+          <p>
+            Both TelemetryDeck and Sentry store data in the EU (TelemetryDeck in
+            Germany; Sentry’s EU data region, hosted in Frankfurt). Sentry is a
+            US-incorporated company, so although the data itself is stored in
+            the EU, the processing relationship is covered by Sentry’s data
+            processing agreement and standard contractual clauses rather than
+            the data simply never crossing a border.
+          </p>
+
+          <h2 id="retention">How long data is kept</h2>
+          <ul>
+            <li>
+              <strong>Your transactions and other records:</strong> on your
+              device, until you delete them. There is no copy anywhere else.
+            </li>
+            <li>
+              <strong>Usage statistics:</strong> retained by TelemetryDeck under
+              its own retention policy. Because the identifier rotates daily,
+              older data cannot be connected to newer data.
+            </li>
+            <li>
+              <strong>Crash reports:</strong> retained by Sentry for 30 days.
+            </li>
+          </ul>
+
+          <h2 id="rights">Your rights</h2>
+          <p>
+            If you are in the EU, UK, or another region with similar law, you
+            have the right to access, correct, delete, restrict, or object to the
+            processing of your personal data, and to receive it in a portable
+            form.
+          </p>
+          <p>
+            In practice, most of these rights have nothing to act on: {SITE.name}
+            {' '}holds no account and no personal profile, your data is on your own
+            device and outside our reach, and the usage statistics are anonymized
+            so they cannot be traced back to you or retrieved individually.
+          </p>
+          <p>
+            For crash reports, you can stop future collection at any time using
+            the Settings switch. To request deletion of past reports, contact us
+            at the address above and we will pass the request to Sentry.
+          </p>
+          <p>
+            You also have the right to lodge a complaint with your local data
+            protection authority.
+          </p>
+
+          <h2 id="children">Children</h2>
+          <p>
+            {SITE.name} is not directed at children under 13 and does not
+            knowingly collect information from them.
+          </p>
+
+          <h2 id="changes">Changes to this policy</h2>
+          <p>
+            If this policy changes, the updated version will be published at
+            this address with a new “last updated” date. Significant changes to
+            what {SITE.name} collects will be described in the app’s release
+            notes.
+          </p>
+
+          <h2 id="contact">Contact</h2>
+          <p>
+            {SITE.author}<br />
+            <a href={mailto}>{SITE.email}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
