@@ -1,5 +1,25 @@
 {
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/git-commit-guard.sh",
+            "statusMessage": "Enforcing /commit-message skill..."
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/gh-pr-guard.sh",
+            "statusMessage": "Enforcing /create-pr skill..."
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
-    "ui-ux-pro-max@ui-ux-pro-max-skill": true
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "git-workflow@pyaethu-aung-skills": true
   }
 }
