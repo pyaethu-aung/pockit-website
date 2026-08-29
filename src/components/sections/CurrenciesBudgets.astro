@@ -1,21 +1,21 @@
 ---
 const accounts = [
-  { code: 'USD', name: 'Checking', meta: 'Bank · rate 1.00', balance: '$2,410.00' },
-  { code: 'EUR', name: 'Savings', meta: 'Savings · rate 1.08', balance: '€1,850.00' },
-  { code: 'JPY', name: 'Cash', meta: 'Cash · rate 0.0064', balance: '¥312,000' },
+  { code: 'USD', name: 'Checking', meta: 'Bank account', balance: '$2,410.00' },
+  { code: 'EUR', name: 'Rainy day', meta: 'Savings account', balance: '€1,850.00' },
+  { code: 'JPY', name: 'Wallet', meta: 'Cash', balance: '¥312,000' },
 ] as const;
 
 const budgets = [
   { name: 'Eating out', spent: '$164 of $250', pct: 66, meta: 'Weekly from Wednesday · 3 days left', over: false },
   { name: 'Household', spent: '$612 of $900', pct: 68, meta: 'Monthly, rolls on the 25th', over: false },
-  { name: 'Bangkok trip', spent: '112% of $600', pct: 100, meta: 'One-off · Sep 12 – Sep 19', over: true },
+  { name: 'Bangkok trip', spent: '$672 of $600', pct: 100, meta: 'One-off · Sep 12 – Sep 19', over: true },
 ] as const;
 ---
 
 <section class="section section--banded">
   <div class="shell grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
     <div>
-      <p class="t-eyebrow">Currencies</p>
+      <p class="t-eyebrow">Accounts</p>
       <h2 class="t-h2-sm mt-3.5">Everything in one place.</h2>
       <p class="t-body mt-5">
         Every account in one list &mdash; cash, bank, and other currencies at
@@ -45,7 +45,7 @@ const budgets = [
 
     <div>
       <p class="t-eyebrow">Budgets</p>
-      <h2 class="t-h2-sm mt-3.5">Butgets made simple.</h2>
+      <h2 class="t-h2-sm mt-3.5">Budgets that keep count.</h2>
       <p class="t-body mt-5">
         Set a limit per category or a one-off. Pockit counts against it as you
         spend and shows how much is left and how long it has to last.
