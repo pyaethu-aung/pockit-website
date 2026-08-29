@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "15px",
+        "createdAt": "2026-08-29T04:53:17.552Z",
+        "reason": "incumbent site-wide convention (PrivacyPromise, Entry, Nav, Footer all use 14-15px literals); DESIGN.md type ramp lacks a small-caption step between 12px label and 16.5px body. Tracked as an open critique finding for a later typeset/polish pass; matching the existing pattern here rather than inventing a one-off step."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "14.5px",
+        "createdAt": "2026-08-29T04:53:53.920Z",
+        "reason": "pre-existing Features-grid body size; same incumbent type-ramp gap as 15px (no documented step between 12px label and 16.5px body). On the critique backlog for a typeset/polish pass; not touched by this change."
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "14px",
+        "createdAt": "2026-08-29T04:53:53.974Z",
+        "reason": "pre-existing Nav/Footer/Categories caption size; same incumbent type-ramp gap. On the critique backlog for a typeset/polish pass."
+      }
+    ]
+  }
+}
