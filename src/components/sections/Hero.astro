@@ -2,9 +2,7 @@
 import PhoneFrame from '../PhoneFrame.astro';
 import Screenshot from '../Screenshot.astro';
 import DownloadButton from '../DownloadButton.astro';
-import { SITE } from '../../consts';
-
-const notifyHref = `mailto:${SITE.email}?subject=Notify%20me%20when%20Pockit%20launches`;
+import { NOTIFY_URL } from '../../consts';
 ---
 
 <section
@@ -19,7 +17,7 @@ const notifyHref = `mailto:${SITE.email}?subject=Notify%20me%20when%20Pockit%20l
   <div class="mt-9 flex w-full max-w-[340px] flex-col items-center gap-3">
     <DownloadButton full />
     <span class="text-[13px] text-text3">Free. No account required.</span>
-    <a href={notifyHref} class="text-[13px] font-semibold text-accent">
+    <a href={NOTIFY_URL} class="text-[13px] font-medium text-accent">
       Email me when it&rsquo;s on the App Store
     </a>
   </div>

@@ -26,3 +26,12 @@ export const SITE = {
 
 /** Shown in the policy dateline. Bump this whenever the policy text changes. */
 export const POLICY_LAST_UPDATED = '18 August 2026';
+
+/**
+ * Prefilled "notify me at launch" mailto. Used beside the hero and final-CTA
+ * download buttons while the store URLs are still null; it is the only
+ * conversion action available pre-launch.
+ */
+export const NOTIFY_URL = `mailto:${SITE.email}?subject=${encodeURIComponent(
+  'Notify me when Pockit launches',
+)}`;
