@@ -24,8 +24,11 @@ const classes = ['btn', size === 'sm' && 'btn--sm', full && 'w-full'];
       {text}
     </a>
   ) : (
-    <span class:list={classes} data-unreleased>
-      {text} <span class="font-normal opacity-80">&middot; soon</span>
+    <span class:list={classes} data-unreleased aria-disabled="true">
+      {text}{' '}
+      <span class="font-normal opacity-80">
+        &middot; <span class="sr-only">coming </span>soon
+      </span>
     </span>
   )
 }

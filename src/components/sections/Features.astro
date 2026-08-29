@@ -15,10 +15,15 @@ const features: { icon: IconName; title: string; body: string }[] = [
 ---
 
 <section class="section" id="features">
-  <div class="shell flex flex-col items-center">
-    <h2 class="t-h2-sm max-w-[760px] text-center">And the rest of it.</h2>
+  <div class="shell flex flex-col items-center text-center">
+    <p class="t-eyebrow">More</p>
+    <h2 class="t-h2-sm mt-3.5 max-w-[760px]">And the rest of it.</h2>
+    <p class="t-body mt-5 max-w-[620px]">
+      Search, tags, transfers, effective dates, CSV backup &mdash; the parts
+      that didn&rsquo;t need a section of their own.
+    </p>
     <ul
-      class="mt-14 grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+      class="mt-14 grid w-full grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-4"
     >
       {
         features.map((feature) => (

@@ -37,7 +37,7 @@ const points: { icon: IconName; text: string }[] = [
           points.map((point) => (
             <li class="flex items-start gap-3 text-[15px] leading-[1.55] text-text2">
               <span class="mt-0.5 shrink-0 text-accent">
-                <Icon name={point.icon} size={18} strokeWidth={2} />
+                <Icon name={point.icon} size={18} />
               </span>
               {point.text}
             </li>
@@ -48,7 +48,7 @@ const points: { icon: IconName; text: string }[] = [
       <p
         class="card card--inset mt-7 flex items-center gap-2.5 rounded-[16px] px-4.5 py-3.5 text-[15px] text-text2"
       >
-        <span class="shrink-0 text-accent"><Icon name="undo" size={18} strokeWidth={2} /></span>
+        <span class="shrink-0 text-accent"><Icon name="undo" size={18} /></span>
         Every save is confirmed with a five-second Undo.
       </p>
     </div>
