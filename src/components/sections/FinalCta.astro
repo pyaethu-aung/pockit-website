@@ -1,19 +1,16 @@
 ---
 import DownloadButton from '../DownloadButton.astro';
-import { SITE, NOTIFY_URL } from '../../consts';
+import { SITE } from '../../consts';
 ---
 
 <section class="section section--banded text-center">
   <div class="shell flex flex-col items-center">
-    <h2 class="t-h2-lg max-w-[780px]">Coming to the App Store.</h2>
+    <h2 class="t-h2-lg max-w-[780px]">Now on the App Store.</h2>
     <p class="t-lead mt-5 max-w-[560px]">
       Free, no account, and everything stays on your phone.
     </p>
     <div class="mt-9 flex w-full max-w-[340px] flex-col items-center gap-3">
       <DownloadButton full />
-      <a href={NOTIFY_URL} class="text-[13px] font-medium text-accent">
-        Email me when it&rsquo;s on the App Store
-      </a>
     </div>
     <p class="mt-4 text-[13px] text-text3">
       iPhone first &mdash; an Android version is coming to Google Play.

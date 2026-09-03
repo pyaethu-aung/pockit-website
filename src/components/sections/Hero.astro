@@ -2,7 +2,6 @@
 import PhoneFrame from '../PhoneFrame.astro';
 import Screenshot from '../Screenshot.astro';
 import DownloadButton from '../DownloadButton.astro';
-import { NOTIFY_URL } from '../../consts';
 ---
 
 <section
@@ -17,9 +16,6 @@ import { NOTIFY_URL } from '../../consts';
   <div class="mt-9 flex w-full max-w-[340px] flex-col items-center gap-3">
     <DownloadButton full />
     <span class="text-[13px] text-text3">Free. No account required.</span>
-    <a href={NOTIFY_URL} class="text-[13px] font-medium text-accent">
-      Email me when it&rsquo;s on the App Store
-    </a>
   </div>
 
   <PhoneFrame

@@ -14,24 +14,15 @@ export const SITE = {
   author: 'Pockit',
   email: 'pockitapp.pyaethuaung@gmail.com',
   person: 'Pyae Thu Aung',
+  /** Live App Store listing (Apple ID 6803324516). */
+  appStoreUrl: 'https://apps.apple.com/app/id6803324516',
   /**
-   * TODO before launch: replace with the real App Store URL. While this is
-   * null the download buttons render as a non-interactive "coming soon" state
-   * rather than a link that goes nowhere.
+   * TODO: Google Play URL once the Android build ships. While this is null the
+   * download buttons render as a non-interactive "· soon" state rather than a
+   * link that goes nowhere.
    */
-  appStoreUrl: null as string | null,
-  /** TODO before launch: Google Play URL, same treatment as above. */
   playStoreUrl: null as string | null,
 } as const;
 
 /** Shown in the policy dateline. Bump this whenever the policy text changes. */
 export const POLICY_LAST_UPDATED = '18 August 2026';
-
-/**
- * Prefilled "notify me at launch" mailto. Used beside the hero and final-CTA
- * download buttons while the store URLs are still null; it is the only
- * conversion action available pre-launch.
- */
-export const NOTIFY_URL = `mailto:${SITE.email}?subject=${encodeURIComponent(
-  'Notify me when Pockit launches',
-)}`;
