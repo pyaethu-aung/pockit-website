@@ -118,10 +118,10 @@ raising it keeps a visible gap from `--text3` now that `--text3` is lighter.
 
 ## Before launch
 
-1. **`SITE.appStoreUrl` / `SITE.playStoreUrl` in `src/consts.ts`** are `null`.
-   While null, every download button renders as a non-interactive "· soon"
-   placeholder instead of a link to nowhere. Fill them in and all instances
-   become real links automatically.
+1. **`SITE.playStoreUrl` in `src/consts.ts`** is still `null` (no Android build
+   yet). While null, every download button renders as a non-interactive "· soon"
+   placeholder instead of a link to nowhere. Fill it in and all instances become
+   real links automatically. `SITE.appStoreUrl` is live (Apple ID 6803324516).
 2. **`site` in `astro.config.mjs`** is `https://pockit.pyaethuaung.com`, the
    GitHub Pages subdomain the site currently deploys to (see Deployment below).
    Repoint it at `pockit.app` once that domain is set up.
