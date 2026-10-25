@@ -9,7 +9,7 @@ export const SITE = {
   name: 'Pockit',
   tagline: 'Your money. Simplified.',
   description:
-    'A local-first expense tracker for iPhone. No account, no sync, no server: everything stays in a database on your device.',
+    'A local-first expense tracker for iPhone. No account, no server of ours: everything lives on your device, and in your own iCloud only if you turn on sync.',
   /** Data controller / copyright holder, per docs/privacy-policy.md. */
   author: 'Pockit',
   email: 'pockitapp.pyaethuaung@gmail.com',
@@ -25,4 +25,4 @@ export const SITE = {
 } as const;
 
 /** Shown in the policy dateline. Bump this whenever the policy text changes. */
-export const POLICY_LAST_UPDATED = '18 August 2026';
+export const POLICY_LAST_UPDATED = '9 October 2026';

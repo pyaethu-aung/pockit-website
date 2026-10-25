@@ -10,8 +10,8 @@ const pillars: { icon: IconName; title: string; body: string }[] = [
   },
   {
     icon: 'no-upload',
-    title: 'Nothing uploaded',
-    body: 'Your amounts, notes and categories are never sent anywhere. Export a ZIP of CSVs whenever you want them elsewhere.',
+    title: 'Nothing sent to us',
+    body: 'Your amounts, notes and categories never reach us. Turn on iCloud Sync and they travel encrypted to your own iCloud, nowhere else. Export a ZIP of CSVs whenever you want them elsewhere.',
   },
   {
     icon: 'lock',
@@ -26,9 +26,10 @@ const pillars: { icon: IconName; title: string; body: string }[] = [
     <p class="t-eyebrow">Privacy</p>
     <h2 class="t-h2-lg mt-3.5 max-w-[880px]">Private by design.</h2>
     <p class="t-lead mt-5 max-w-[660px]">
-      Your transactions are stored in a SQLite database on the phone itself.
-      No account, no background sync, no copy of your spending on a server
-      anywhere. A synced app can&rsquo;t say that.
+      Your transactions are stored in an encrypted database on the phone
+      itself. No account, and no copy of your spending on a server of ours.
+      Want it on your other iPhones? iCloud Sync is off until you turn it on,
+      and it encrypts every record before it leaves the device.
     </p>
 
     <ul
@@ -48,7 +49,8 @@ const pillars: { icon: IconName; title: string; body: string }[] = [
     </ul>
 
     <p class="mt-11 max-w-[700px] text-[15px] leading-[1.65] text-text3">
-      The only data that ever leaves the device is anonymous usage counts and,
+      Apart from iCloud Sync, which only you can turn on, the only data that
+      ever leaves the device is anonymous usage counts and,
       if the app crashes, a technical report of what went wrong. Neither
       carries an amount, a date, a name, or anything you typed, and both can be
       switched off in Settings.
