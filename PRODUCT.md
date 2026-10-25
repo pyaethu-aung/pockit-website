@@ -31,13 +31,18 @@ installing the app.
 
 ## Positioning
 
-**Local-first: the data never leaves the device.** All transactions live in a
-SQLite database on the phone. No account, no sign-in, no background sync, no
-server-side copy of anyone's spending. The only data that ever leaves is
-optional anonymous usage counts and opt-in crash reports — neither carries an
-amount, date, name, or anything the user typed, and both switch off in Settings.
-Export is a ZIP of plain CSVs the user owns outright. A cloud-backed competitor
-cannot truthfully make the same claim; that gap is the product.
+**Local-first: the data never reaches us.** All transactions live in an
+encrypted SQLite database on the phone. No account, no sign-in, no server of
+ours, no developer-side copy of anyone's spending. Since 1.2.0 there is an
+opt-in iCloud Sync (iOS 17+): records go to the user's *own* private iCloud,
+encrypted on the device before they leave, and never to us. So the claim is
+"we never hold your data", not "it never leaves the phone"; copy must not say
+the latter, and must not claim nobody but the user can ever read synced data.
+Besides sync, the only data that leaves is optional anonymous usage counts and
+crash reports — neither carries an amount, date, name, or anything the user
+typed, and both switch off in Settings. Export is a ZIP of plain CSVs the user
+owns outright. A cloud-backed competitor holding its users' ledgers on its own
+servers cannot truthfully make the same claim; that gap is the product.
 
 ## Operating Context
 

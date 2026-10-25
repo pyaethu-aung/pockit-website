@@ -14,6 +14,7 @@ import { SITE, POLICY_LAST_UPDATED } from '../consts';
 const toc = [
   { id: 'controller', label: 'Who is responsible' },
   { id: 'device', label: 'Data on your device' },
+  { id: 'icloud', label: 'iCloud Sync' },
   { id: 'sent', label: 'What the app sends' },
   { id: 'basis', label: 'Legal basis (EU/UK)' },
   { id: 'transfers', label: 'International transfers' },
@@ -29,7 +30,7 @@ const mailto = `mailto:${SITE.email}`;
 
 <Layout
   title={`Privacy Policy · ${SITE.name}`}
-  description={`How ${SITE.name} handles your data: your transactions never leave your phone, and the two things that do leave can be switched off.`}
+  description={`How ${SITE.name} handles your data: your transactions stay on your phone, or in your own iCloud if you turn on sync, and the two things that reach anyone else can be switched off.`}
   current="privacy"
 >
   <div class="section">
@@ -45,8 +46,11 @@ const mailto = `mailto:${SITE.email}`;
           The short version
         </h2>
         <p class="mt-4 text-[clamp(1.0625rem,1rem+0.24vw,1.1563rem)] leading-[1.65] text-text">
-          Your transactions never leave your phone. There is no account, no
-          sign-in, and no server holding your data.
+          Your transactions stay on your phone. There is no account, no
+          sign-in, and no server of ours holding your data. If you turn on
+          iCloud Sync, they are also kept in your own iCloud account, encrypted
+          before they leave the device, so your other iPhones can share them.
+          We never see them either way.
         </p>
         <p class="mt-3.5 text-[clamp(1rem,0.977rem+0.1vw,1.0313rem)] leading-[1.7] text-text2">
           The only information that leaves your device is anonymous usage counts
@@ -103,22 +107,64 @@ const mailto = `mailto:${SITE.email}`;
           <h2 id="device">Your transactions stay on your device</h2>
           <p>
             <strong>
-              {SITE.name} never uploads your transactions, categories, accounts,
-              or budgets. There is no server, no cloud sync, and no account
+              {SITE.name} never sends your transactions, categories, accounts,
+              or budgets to us. There is no server of ours and no account
               holding them.
             </strong>
           </p>
           <p>
             Everything you record is saved inside the app’s own storage on your
-            device, in a local database. It is included in your device’s normal
-            iCloud or Android backup, the same as any other app’s files, but
-            {' '}{SITE.name} itself never transmits your financial data anywhere.
+            device, in an encrypted local database. It is included in your
+            device’s normal iCloud or Android backup, the same as any other
+            app’s files. The only way {SITE.name} itself moves your records off
+            the device is iCloud Sync, and only if you turn it on.
           </p>
           <p>
             A backup you create with Backup &amp; Restore is a file you choose
             where to send: saved to your device, shared through the system share
             sheet, or kept wherever you put it. It goes where you send it, not
             to us.
+          </p>
+
+          <h2 id="icloud">iCloud Sync, off unless you turn it on</h2>
+          <p>
+            <strong>
+              Available on iPhone with iOS 17 or later. Off until you switch it
+              on in Settings &rsaquo; iCloud Sync.
+            </strong>
+          </p>
+          <p>
+            When it is on, your transactions, categories, accounts, budgets,
+            currencies, and exchange rates are stored as records in the private
+            database of your own iCloud account, using Apple’s CloudKit service.
+            That is how every iPhone signed in to the same Apple Account keeps
+            the same records. Your app settings, including the app lock and its
+            passcode, do not sync.
+          </p>
+          <p>
+            The contents of each record are encrypted on your device before they
+            are sent, with keys kept in your iCloud Keychain. Apple stores the
+            records and can see that they exist, how many there are, their sizes,
+            and when they changed, but not what they contain. We have no access
+            to your iCloud account or to anything stored in it.
+          </p>
+          <p>
+            Who can read synced records: your own devices, and anyone who can
+            sign in to your Apple Account and also unlock your iCloud Keychain
+            (for example, with the passcode of one of your trusted devices).
+            Protect your Apple Account the way you would protect the phone
+            itself.
+          </p>
+          <p>
+            Apple’s handling of iCloud data is covered by Apple’s own privacy
+            policy and iCloud terms, not by this policy.
+          </p>
+          <p>
+            <strong>To stop it:</strong> turning off the switch in Settings
+            &rsaquo; iCloud Sync pauses sync; what is already in iCloud stays
+            there so you can resume later. Delete iCloud Data, on the same
+            screen, removes your records from iCloud. Neither deletes anything
+            from your device.
           </p>
 
           <h2 id="sent">What {SITE.name} does send</h2>
@@ -194,6 +240,14 @@ const mailto = `mailto:${SITE.email}`;
                   </td>
                 </tr>
                 <tr>
+                  <td>Records synced with iCloud Sync</td>
+                  <td>To keep your devices in step, only if you turn it on</td>
+                  <td>
+                    Your choice; stored by Apple in your own iCloud account under
+                    your agreement with Apple, not accessible to us
+                  </td>
+                </tr>
+                <tr>
                   <td>Anonymous usage statistics</td>
                   <td>
                     To understand which features are worth keeping and improving
@@ -224,12 +278,19 @@ const mailto = `mailto:${SITE.email}`;
             processing agreement and standard contractual clauses rather than
             the data simply never crossing a border.
           </p>
+          <p>
+            If you turn on iCloud Sync, Apple decides where your iCloud data is
+            stored, under its own privacy policy. It is encrypted before it
+            leaves your device.
+          </p>
 
           <h2 id="retention">How long data is kept</h2>
           <ul>
             <li>
               <strong>Your transactions and other records:</strong> on your
-              device, until you delete them. There is no copy anywhere else.
+              device, until you delete them. If you turn on iCloud Sync, also in
+              your own iCloud account until you delete them or use Delete iCloud
+              Data. There is no copy anywhere else.
             </li>
             <li>
               <strong>Usage statistics:</strong> retained by TelemetryDeck under
@@ -251,7 +312,8 @@ const mailto = `mailto:${SITE.email}`;
           <p>
             In practice, most of these rights have nothing to act on: {SITE.name}
             {' '}holds no account and no personal profile, your data is on your own
-            device and outside our reach, and the usage statistics are anonymized
+            device (and, with iCloud Sync on, in your own iCloud account) and
+            outside our reach, and the usage statistics are anonymized
             so they cannot be traced back to you or retrieved individually.
           </p>
           <p>
